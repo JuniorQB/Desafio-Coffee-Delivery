@@ -8,7 +8,7 @@ interface coffeOrderProps {
 
 interface OrderContextData {
   coffeeOrder: (data: coffeOrderProps) => void
-  quantityItemsInOrder: () => void
+  order: coffeOrderProps[]
   quantityItems: number
 }
 
@@ -20,30 +20,36 @@ interface OrderContextProviderProps {
 
 export function OrderContextProvider({ children }: OrderContextProviderProps) {
   const [order, setOrder] = useState<coffeOrderProps[]>([])
-  const [quantityItems, setQuantityItems] = useState(0)
-
-  function coffeeOrder(data: coffeOrderProps) {
-    setOrder([...order, data])
-    console.log(order)
-    quantityItemsInOrder()
+  let quantityItems = 0
+  if (order.length > 0) {
+    quantityItems = order
+      .map((item) => item.quantity)
+      .reduce((prev, next) => prev + next)
   }
 
-  function quantityItemsInOrder() {
-    let sum = 0
+  function coffeeOrder(data: coffeOrderProps) {
+    const tempOrder = order
 
-    for (let i = 0; i < order.length; i++) {
-      sum = +order[i].quantity
+    const temp = tempOrder.filter((itemFind) => {
+      return itemFind.idCoffe !== data.idCoffe
+    })
+    if (data.quantity > 0) {
+      if (temp) {
+        setOrder([...temp, data])
+      } else {
+        setOrder([...order, data])
+      }
+    } else {
+      setOrder([...temp])
     }
-
-    setQuantityItems(sum)
   }
 
   return (
     <OrderContext.Provider
       value={{
         coffeeOrder,
-        quantityItemsInOrder,
         quantityItems,
+        order,
       }}
     >
       {children}
