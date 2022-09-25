@@ -1,4 +1,14 @@
-import { MapPinLine } from 'phosphor-react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Minus,
+  Money,
+  Plus,
+  Trash,
+} from 'phosphor-react'
+import { NavLink } from 'react-router-dom'
 import {
   ContainerCheckout,
   LeftCheckout,
@@ -7,6 +17,17 @@ import {
   DescriptionForm,
   InputGroup,
   Input,
+  PaymentMethod,
+  RigghtChekout,
+  CoffeCard,
+  Itens,
+  ItemCheckout,
+  DivButtons,
+  ButtonItemCheckout,
+  ButtonItemCheckoutRemove,
+  PriceCheckout,
+  TotalOrder,
+  TotalOrderDiv,
 } from './styles'
 
 export function Checkout() {
@@ -15,7 +36,7 @@ export function Checkout() {
       <LeftCheckout>
         <Title>Complete seu pedido</Title>
         <FormContainer>
-          <DescriptionForm>
+          <DescriptionForm statusColor="yellowDark">
             <MapPinLine />
             <div>
               <strong>Endereço de Entrega</strong>
@@ -60,10 +81,106 @@ export function Checkout() {
             </InputGroup>
           </form>
         </FormContainer>
-        <div>Modulo de pagamento</div>
+        <FormContainer>
+          <DescriptionForm statusColor="purpleDark">
+            <CurrencyDollar />
+            <div>
+              <strong>Pagamento </strong>
+              <span>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </span>
+            </div>
+          </DescriptionForm>
+          <PaymentMethod>
+            <button>
+              <CreditCard />
+              Cartão de Crédito
+            </button>
+            <button>
+              <Bank />
+              Cartão de Débito
+            </button>
+            <button>
+              <Money />
+              Dinheiro
+            </button>
+          </PaymentMethod>
+        </FormContainer>
       </LeftCheckout>
+      <RigghtChekout>
+        <Title>Cafés Selecionados</Title>
+        <CoffeCard>
+          <Itens>
+            <ItemCheckout>
+              <div>
+                <img src="/imagens/expressotradicional.svg" alt="" />
 
-      <Title>Descrição do pedido</Title>
+                <div>
+                  <span>Expresso tradicional</span>
+                  <DivButtons>
+                    <ButtonItemCheckout>
+                      <button>
+                        <Minus />
+                      </button>
+                      <span>1</span>
+                      <button>
+                        <Plus />
+                      </button>
+                    </ButtonItemCheckout>
+                    <ButtonItemCheckoutRemove>
+                      <Trash />
+                      Remover
+                    </ButtonItemCheckoutRemove>
+                  </DivButtons>
+                </div>
+              </div>
+              <PriceCheckout>R$ 9,90</PriceCheckout>
+            </ItemCheckout>
+            <ItemCheckout>
+              <div>
+                <img src="/imagens/expressotradicional.svg" alt="" />
+
+                <div>
+                  <span>Expresso tradicional</span>
+                  <DivButtons>
+                    <ButtonItemCheckout>
+                      <button>
+                        <Minus />
+                      </button>
+                      <span>1</span>
+                      <button>
+                        <Plus />
+                      </button>
+                    </ButtonItemCheckout>
+                    <ButtonItemCheckoutRemove>
+                      <Trash />
+                      Remover
+                    </ButtonItemCheckoutRemove>
+                  </DivButtons>
+                </div>
+              </div>
+              <PriceCheckout>R$ 9,90</PriceCheckout>
+            </ItemCheckout>
+          </Itens>
+          <TotalOrder>
+            <TotalOrderDiv>
+              <span>Total de itens</span>
+              <span>R$ 29,70</span>
+            </TotalOrderDiv>
+            <TotalOrderDiv>
+              <span>Entrega</span>
+              <span>R$ 3,50</span>
+            </TotalOrderDiv>
+            <TotalOrderDiv grandTotal>
+              <span>Total</span>
+              <span>R$ 32,50</span>
+            </TotalOrderDiv>
+            <NavLink to="/" title="Home">
+              Confirmar Pedido
+            </NavLink>
+          </TotalOrder>
+        </CoffeCard>
+      </RigghtChekout>
     </ContainerCheckout>
   )
 }
