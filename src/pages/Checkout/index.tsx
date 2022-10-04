@@ -175,7 +175,7 @@ export function Checkout() {
               <span>Total</span>
               <span>R$ 32,50</span>
             </TotalOrderDiv>
-            <NavLink to="/" title="Home">
+            <NavLink to="/OrderCompletion" title="Order Completion">
               Confirmar Pedido
             </NavLink>
           </TotalOrder>
